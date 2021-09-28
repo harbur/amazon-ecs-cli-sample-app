@@ -47,3 +47,9 @@ jobs:
 
       # sample use
       - run: copilot help
+
+      # sample use
+      - run: copilot app ls
+      
+      # sample use
+      - run: copilot app show
