@@ -23,8 +23,17 @@ jobs:
       # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
       - uses: actions/checkout@v2
       
-      - name: Setup AWS Copilot
-        uses: softprops/setup-aws-copilot@v1
+      - name: Install copilot
+        run: |
+          mkdir -p $GITHUB_WORKSPACE/bin
+          # download copilot
+          curl -Lo copilot-linux https://github.com/aws/copilot-cli/releases/download/v1.8.3/copilot-linux && \
+          # make copilot bin executable
+          chmod +x copilot-linux && \
+          # move to path
+          mv copilot-linux $GITHUB_WORKSPACE/bin/copilot && \
+          # add to PATH
+          echo "$GITHUB_WORKSPACE/bin" >> $GITHUB_PATH
 
       # Runs a single command using the runners shell
       - name: Run a one-line script
@@ -36,5 +45,5 @@ jobs:
           echo Add other actions to build,
           echo test, and deploy your project.
 
-      - name: Run a copilot help
-        run: copilot help
+      # sample use
+      - run: copilot help
